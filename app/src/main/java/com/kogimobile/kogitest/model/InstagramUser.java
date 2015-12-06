@@ -8,15 +8,16 @@ package com.kogimobile.kogitest.model;
 public class InstagramUser {
 
     /** The name of the user. **/
-    private String name;
+    private final String name;
 
+    /* TODO Set as URL */
     /** The url to the user's profile on Instagram. **/
-    private String urlProfile;
+    private final String urlProfile;
 
     /** Constructor of the class. **/
-    public InstagramUser(String name, String urlProfile){
-        this.name = name;
-        this.urlProfile = urlProfile;
+    private InstagramUser(InstagramUserBuiler builder){
+        this.name = builder.name;
+        this.urlProfile = builder.urlProfile;
     }
 
     /**
@@ -28,14 +29,6 @@ public class InstagramUser {
     }
 
     /**
-     * Set the name of the user.
-     * @param name  the name of the user.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Get a url that sends to user's profile on internet.
      * @return  the url.
      */
@@ -43,11 +36,27 @@ public class InstagramUser {
         return urlProfile;
     }
 
-    /**
-     * Set the url of the user's profile.
-     * @param urlProfile    the url to set.
-     */
-    public void setUrlProfile(String urlProfile) {
-        this.urlProfile = urlProfile;
+    public static class InstagramUserBuiler{
+
+        private String name;
+        private String urlProfile;
+
+        public InstagramUserBuiler(){
+        }
+
+        public InstagramUserBuiler name(String name){
+            this.name = name;
+            return this;
+        }
+
+        public InstagramUserBuiler urlProfile(String urlProfile){
+            this.urlProfile = urlProfile;
+            return this;
+        }
+
+        public InstagramUser build(){
+            return new InstagramUser(this);
+        }
+
     }
 }
