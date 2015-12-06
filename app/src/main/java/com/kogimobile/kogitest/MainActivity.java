@@ -13,6 +13,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.kogimobile.kogitest.adapters.grid_images_adapter;
+import com.kogimobile.kogitest.utils.VolleyUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        VolleyUtils.updatePostList(this.getApplicationContext());
 
     }
 
