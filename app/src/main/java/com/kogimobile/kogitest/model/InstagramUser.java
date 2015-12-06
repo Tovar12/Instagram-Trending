@@ -7,25 +7,37 @@ package com.kogimobile.kogitest.model;
  */
 public class InstagramUser {
 
-    /** The name of the user. **/
-    private final String name;
+    /** The full name of the user. **/
+    private final String fullName;
 
     /* TODO Set as URL */
     /** The url to the user's profile on Instagram. **/
     private final String urlProfile;
 
+    /** The username of the user **/
+    private final String userName;
+
     /** Constructor of the class. **/
     private InstagramUser(InstagramUserBuiler builder){
-        this.name = builder.name;
+        this.fullName = builder.fullName;
+        this.userName = builder.userName;
         this.urlProfile = builder.urlProfile;
     }
 
     /**
-     * Get the name of the user.
-     * @return  the name of the user.
+     * Get the full name of the user.
+     * @return  the full name of the user.
      */
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
+    }
+
+    /**
+     * Get the user name of the user.
+     * @return  the user name of the user.
+     */
+    public String getUserName() {
+        return userName;
     }
 
     /**
@@ -38,14 +50,20 @@ public class InstagramUser {
 
     public static class InstagramUserBuiler{
 
-        private String name;
+        private String fullName;
+        private String userName;
         private String urlProfile;
 
         public InstagramUserBuiler(){
         }
 
-        public InstagramUserBuiler name(String name){
-            this.name = name;
+        public InstagramUserBuiler fullName(String fullName){
+            this.fullName = fullName;
+            return this;
+        }
+
+        public InstagramUserBuiler userName(String userName){
+            this.userName = userName;
             return this;
         }
 
