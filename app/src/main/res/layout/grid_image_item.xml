@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/grid_image"
+        android:scaleType="centerCrop"
+        android:layout_width="50dp"
+        android:layout_height="50dp">
+    </com.android.volley.toolbox.NetworkImageView>
+
+    <TextView
+        android:id="@+id/grid_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:singleLine="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="9sp" >
+    </TextView>
+
+</LinearLayout>

@@ -21,6 +21,12 @@ public class InstagramPost {
     /** The title of the picture **/
     private final String title;
 
+    /** The url of the thumbnail **/
+    private final String thumbnailURL;
+
+    /** The url of the image that will be show **/
+    private final String imageURL;
+
     /**
      * Constructor of the class.
      * @param builder   an object to construct the Instagram post.
@@ -30,6 +36,8 @@ public class InstagramPost {
         this.instagramUser = builder.instagramUser;
         this.tags = builder.tags;
         this.title = builder.title;
+        this.thumbnailURL = builder.thumbnailURL;
+        this.imageURL = builder.imageURL;
     }
 
     public String getTimeStamp() {
@@ -49,6 +57,14 @@ public class InstagramPost {
         return title;
     }
 
+    public String getThumbnailURL() {
+        return thumbnailURL;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
     /**
      * Builder class of an Instragram post
      */
@@ -58,6 +74,8 @@ public class InstagramPost {
         private InstagramUser instagramUser;
         private List<String> tags;
         private String title;
+        private String thumbnailURL;
+        private String imageURL;
 
         public InstagramPostBuilder(){
         }
@@ -79,6 +97,16 @@ public class InstagramPost {
 
         public InstagramPostBuilder title(String title){
             this.title = title;
+            return this;
+        }
+
+        public InstagramPostBuilder thumbnailURL(String thumbnailURL){
+            this.thumbnailURL = thumbnailURL;
+            return this;
+        }
+
+        public InstagramPostBuilder imageURL(String imageURL){
+            this.imageURL = imageURL;
             return this;
         }
 
