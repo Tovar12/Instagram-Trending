@@ -57,9 +57,9 @@ public class VolleyUtils {
     /** The Instagram prefix url **/
     private static final String INSTAGRAM_URL = "www.instagram.com/";
 
+
     public static void updatePostList(Context context, final OnDownloadTaskCompleted taskCompleted)
     {
-
         posts = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = context.getResources().getString(R.string.url_instagram_service);
@@ -73,30 +73,7 @@ public class VolleyUtils {
                         try {
                             JSONArray jsonArrayInstagram =  response
                                     .getJSONArray(MAIN_JSONARRAY_NAME);
-                            for(int i = 0; i < jsonArrayInstagram.length(); i++){
-                                JSONObject jsonObjectComplete = jsonArrayInstagram.getJSONObject(i);
-                                String createdTime = jsonObjectComplete.getString(JSON_TIME_NAME);
-                                JSONObject captionObject = jsonObjectComplete
-                                        .getJSONObject(JSON_CAPTION_NAME);
-                                String title = captionObject.getString(JSON_TITLE_NAME);
-                                JSONObject fromObject = captionObject.getJSONObject(JSON_FROM_NAME);
-                                String userName = fromObject.getString(JSON_USERNAME_NAME);
-                                String fullName = fromObject.getString(JSON_FULLNAME_NAME);
-                                JSONArray tagsArray = jsonObjectComplete.
-                                        getJSONArray(JSON_TAGS_NAME);
-                                ArrayList<String> tagsList = new ArrayList<>();
-                                for(int j = 0; j < tagsArray.length(); j++){
-                                    tagsList.add(tagsArray.get(j).toString());
-                                }
-                                JSONObject imagesObject = jsonObjectComplete
-                                        .getJSONObject(JSON_IMAGES_NAME);
-                                JSONObject thumbnailObject = imagesObject
-                                        .getJSONObject(JSON_THUMBNAIL_NAME);
-                                String thumbnailURL = thumbnailObject
-                                        .getString(JSON_IMAGE_URL_NAME);
-                                createInstagramPost(createdTime, title, userName, fullName,
-                                        tagsList, thumbnailURL);
-                            }
+                            extractDataFromJson(jsonArrayInstagram);
                             taskCompleted.onTaskCompleted(posts, false, null);
                             //Log.d("Response:%n %s", response.toString(4));
                         } catch (JSONException e) {
@@ -116,6 +93,16 @@ public class VolleyUtils {
         queue.add(jsonObjectRequest);
     }
 
+    /**
+     * Creates an InstagramPost object with the builder pattern and adds It to the ArrayList of
+     * InstagramPosts.
+     * @param createdTime
+     * @param title
+     * @param userName
+     * @param fullName
+     * @param tagsList
+     * @param thumbnailURL
+     */
     public static void createInstagramPost(String createdTime,
                                            String title,
                                            String userName,
@@ -141,5 +128,32 @@ public class VolleyUtils {
                 .build();
 
         posts.add(instagramPost);
+    }
+
+    private static void extractDataFromJson(JSONArray jsonArrayInstagram){
+        for(int i = 0; i < jsonArrayInstagram.length(); i++){
+            try{
+                JSONObject jsonObjectComplete = jsonArrayInstagram.getJSONObject(i);
+                String createdTime = jsonObjectComplete.getString(JSON_TIME_NAME);
+                JSONObject captionObject = jsonObjectComplete.getJSONObject(JSON_CAPTION_NAME);
+                String title = captionObject.getString(JSON_TITLE_NAME);
+                JSONObject fromObject = captionObject.getJSONObject(JSON_FROM_NAME);
+                String userName = fromObject.getString(JSON_USERNAME_NAME);
+                String fullName = fromObject.getString(JSON_FULLNAME_NAME);
+                JSONArray tagsArray = jsonObjectComplete.getJSONArray(JSON_TAGS_NAME);
+                ArrayList<String> tagsList = new ArrayList<>();
+                for(int j = 0; j < tagsArray.length(); j++){
+                    tagsList.add(tagsArray.get(j).toString());
+                }
+                JSONObject imagesObject = jsonObjectComplete.getJSONObject(JSON_IMAGES_NAME);
+                JSONObject thumbnailObject = imagesObject.getJSONObject(JSON_THUMBNAIL_NAME);
+                String thumbnailURL = thumbnailObject.getString(JSON_IMAGE_URL_NAME);
+                createInstagramPost(createdTime, title, userName, fullName, tagsList, thumbnailURL);
+            }catch (JSONException je){
+                //If there is an exception is because some data came wrong from the service so we
+                //ignore that data and continue with the next object
+                Log.e("error","Error of an object from the service");
+            }
+        }
     }
 }
