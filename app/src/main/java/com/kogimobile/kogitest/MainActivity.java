@@ -1,12 +1,20 @@
 package com.kogimobile.kogitest;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import com.kogimobile.kogitest.adapters.BigImageAdapter;
+import com.kogimobile.kogitest.fragments.BigImageFragment;
+import com.kogimobile.kogitest.utils.OnPostPressListener;
+
+public class MainActivity extends AppCompatActivity implements OnPostPressListener {
+
+    ViewPager viewPager = null;
+    BigImageAdapter bigImageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,5 +46,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void inicializeBigImageAdapter(String url){
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        BigImageAdapter adapter = new BigImageAdapter(getSupportFragmentManager());
+        adapter.addFragment(BigImageFragment.newInstance(url));
+        viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onPostPressed(String url) {
+        //BigImageFragment bigImageFragment = new BigImageFragment();
+        //bigImageFragment.setBigImage(url);
+        inicializeBigImageAdapter(url);
     }
 }

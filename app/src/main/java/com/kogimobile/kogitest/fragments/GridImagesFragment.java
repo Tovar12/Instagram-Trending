@@ -1,7 +1,9 @@
 package com.kogimobile.kogitest.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import com.kogimobile.kogitest.R;
 import com.kogimobile.kogitest.adapters.GridImagesAdapter;
 import com.kogimobile.kogitest.model.InstagramPost;
 import com.kogimobile.kogitest.utils.OnDownloadTaskCompleted;
+import com.kogimobile.kogitest.utils.OnPostPressListener;
 import com.kogimobile.kogitest.utils.VolleyUtils;
 
 import java.util.ArrayList;
@@ -22,15 +25,21 @@ import java.util.ArrayList;
 /**
  * Created by FelipeTovarMac on 12/5/15.
  */
-public class GridImagesFragment extends Fragment {
+public class GridImagesFragment extends Fragment implements AdapterView.OnItemClickListener{
 
     private static ArrayList<InstagramPost> posts = new ArrayList<>();
     /** ProgressDialog that shows a loading text **/
     private static ProgressDialog pDialog;
     /** An adapter that has the settings of the list **/
     private static GridImagesAdapter gridImagesAdapter;
+    /** The message shown if there is a problem downloading the data **/
+    private static final String MESSAGE_ERROR_DOWNLOADING_DATA = "Error actualizando la vista";
+    /** The message shown in the progress dialog **/
+    private static final String MESSAGE_INFO_LOADING = "Loading...";
 
     GridView gridview;
+
+    OnPostPressListener postPressListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,26 +53,28 @@ public class GridImagesFragment extends Fragment {
         View  rootView =  inflater.inflate(R.layout.grid_images_fragment, container, false);
 
         gridview = (GridView) rootView.findViewById(R.id.grid);
-        //VolleyUtils.updatePostList(this.getApplicationContext());
-        gridImagesAdapter = new GridImagesAdapter(this.getActivity(), posts);
+        gridImagesAdapter = new GridImagesAdapter(this.getActivity().getApplicationContext(),
+                posts);
         downloadInstagramData();
-        //gridview.setAdapter(new GridImagesAdapter(getActivity(), posts));
-        /*
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                Toast.makeText(getActivity(), "" + position,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-        */
+        gridview.setAdapter(gridImagesAdapter);
+        gridview.setOnItemClickListener(this);
         return rootView;
+    }
+
+    @Override
+    public void onAttach(Activity context) {
+        super.onAttach(context);
+        try{
+            postPressListener = (OnPostPressListener) context;
+        }catch (Exception e){
+            throw new ClassCastException("Must implement onPostPressed");
+        }
     }
 
     private void downloadInstagramData(){
         pDialog = new ProgressDialog(getActivity());
         // Showing progress dialog before making http request
-        pDialog.setMessage("Loading...");
+        pDialog.setMessage(MESSAGE_INFO_LOADING);
         pDialog.show();
         VolleyUtils.updatePostList(getActivity().getApplicationContext(),
                 new OnDownloadTaskCompleted() {
@@ -73,11 +84,12 @@ public class GridImagesFragment extends Fragment {
                 if(!error){
                     posts.addAll(instagramPosts);
                     gridImagesAdapter.swapPosts(posts);
-                    gridview.setAdapter(gridImagesAdapter);
+                    gridImagesAdapter.updateDataSet();
                     hidePDialog();
                 } else {
                     hidePDialog();
-                    Toast.makeText(getActivity().getApplicationContext(), "Error actualizando la vista",
+                    Toast.makeText(getActivity().getApplicationContext(),
+                            MESSAGE_ERROR_DOWNLOADING_DATA,
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -108,6 +120,19 @@ public class GridImagesFragment extends Fragment {
             pDialog = null;
         }
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+                            long id) {
+        // retrieve the GridView item
+        //GridViewItem item = mItems.get(position);
+
+        // do something
+        //Toast.makeText(getActivity(), posts.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+        postPressListener.onPostPressed(posts.get(position).getTitle());
+
+    }
+
     /*
     @Override
     public void onResume() {
