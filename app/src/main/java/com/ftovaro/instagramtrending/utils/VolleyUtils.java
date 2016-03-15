@@ -55,7 +55,7 @@ public class VolleyUtils {
     /** The name of the json object with the url of an image **/
     private static final String JSON_IMAGE_URL_NAME = "url";
     /** The Instagram prefix url **/
-    private static final String INSTAGRAM_URL = "www.instagram.com/";
+    private static final String INSTAGRAM_URL = "https://www.instagram.com/";
 
     private static final String URL = "https://api.instagram.com/v1/media/popular?client_id=" +
             "05132c49e9f148ec9b8282af33f88ac7";

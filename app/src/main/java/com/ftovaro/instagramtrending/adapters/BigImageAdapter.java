@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.ftovaro.instagramtrending.fragments.BigImageFragment;
-import com.ftovaro.instagramtrending.fragments.Images;
 import com.ftovaro.instagramtrending.model.InstagramPost;
 
 import java.util.ArrayList;
@@ -32,6 +31,7 @@ public class BigImageAdapter extends FragmentStatePagerAdapter {
         BigImageFragment fragment = new BigImageFragment();
         fragment.setInstagramPosts(instagramPosts);
         fragment.setImage(instagramPosts.get(position).getImageURL());
+        fragment.setId(position);
         return fragment;
     }
 

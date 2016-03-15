@@ -19,8 +19,6 @@ import java.util.ArrayList;
 
 public class DetailedPostActivity extends AppCompatActivity {
 
-    //private ArrayList<InstagramPost> instagramPosts = new ArrayList<>();
-
     private ViewPager mPager;
 
     private DetailedPostAdapter mPagerAdapter;
@@ -34,10 +32,12 @@ public class DetailedPostActivity extends AppCompatActivity {
 
         DataWrapper dw = (DataWrapper) getIntent().getSerializableExtra("post_list");
         ArrayList<InstagramPost> instagramPosts = dw.getInstagramPosts();
+        int id = getIntent().getIntExtra("id", 0);
 
         mPager = (ViewPager) findViewById(R.id.pagerDetailed);
         mPagerAdapter = new DetailedPostAdapter(getSupportFragmentManager(), instagramPosts);
         mPager.setAdapter(mPagerAdapter);
+        mPager.setCurrentItem(id);
 
     }
 

@@ -23,6 +23,10 @@
         <activity
             android:name=".activities.DetailedPostActivity"
             android:label="@string/title_activity_detailed_post"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".activities.WebActivity"
+            android:label="@string/title_activity_web"
             android:theme="@style/MyMaterialTheme"></activity>
     </application>
 

@@ -12,7 +12,6 @@ public class InstagramUser implements Serializable{
     /** The full name of the user. **/
     private final String fullName;
 
-    /* TODO Set as URL */
     /** The url to the user's profile on Instagram. **/
     private final String urlProfile;
 

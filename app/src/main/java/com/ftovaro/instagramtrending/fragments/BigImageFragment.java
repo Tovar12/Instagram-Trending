@@ -28,6 +28,7 @@ public class BigImageFragment extends Fragment {
     private String imageURL;
 
     private ArrayList<InstagramPost> instagramPosts = new ArrayList<>();
+    private int id;
 
     public BigImageFragment(){
 
@@ -50,6 +51,7 @@ public class BigImageFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), DetailedPostActivity.class);
                 intent.putExtra("post_list", new DataWrapper(instagramPosts));
+                intent.putExtra("id", id);
                 startActivity(intent);
             }
         });
@@ -66,6 +68,10 @@ public class BigImageFragment extends Fragment {
 
     public void setInstagramPosts(ArrayList<InstagramPost> instagramPosts){
         this.instagramPosts.addAll(instagramPosts);
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
 

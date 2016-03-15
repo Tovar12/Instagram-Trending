@@ -1,6 +1,7 @@
 package com.ftovaro.instagramtrending.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ftovaro.instagramtrending.R;
+import com.ftovaro.instagramtrending.activities.WebActivity;
 import com.ftovaro.instagramtrending.utils.AppController;
 
 import org.w3c.dom.Text;
@@ -20,7 +22,7 @@ import org.w3c.dom.Text;
  */
 public class DetailedPostFragment extends Fragment {
 
-    private String imageURL, publishDate, author;
+    private String imageURL, publishDate, author, profileURL;
 
     public DetailedPostFragment() {
         // Required empty public constructor
@@ -45,10 +47,19 @@ public class DetailedPostFragment extends Fragment {
         TextView authorText = (TextView) rootView.findViewById(R.id.author);
         authorText.setText(author);
 
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("profileURL", profileURL);
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 
-    public void setImage(String imageURL){
+    public void setImageURL(String imageURL){
         this.imageURL = imageURL;
     }
 
@@ -60,4 +71,7 @@ public class DetailedPostFragment extends Fragment {
         this.author = author;
     }
 
+    public void setProfileURL(String profileURL) {
+        this.profileURL = profileURL;
+    }
 }
