@@ -27,12 +27,16 @@ public class DetailedPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_post);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         DataWrapper dw = (DataWrapper) getIntent().getSerializableExtra("post_list");
         ArrayList<InstagramPost> instagramPosts = dw.getInstagramPosts();
         int id = getIntent().getIntExtra("id", 0);
+        String title = getIntent().getStringExtra("title");
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle(title);
+        setSupportActionBar(toolbar);
 
         mPager = (ViewPager) findViewById(R.id.pagerDetailed);
         mPagerAdapter = new DetailedPostAdapter(getSupportFragmentManager(), instagramPosts);

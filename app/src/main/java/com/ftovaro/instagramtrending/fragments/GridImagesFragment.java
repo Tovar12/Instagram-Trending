@@ -33,10 +33,6 @@ public class GridImagesFragment extends Fragment implements AdapterView.OnItemCl
     private static ProgressDialog pDialog;
     /** An adapter that has the settings of the list **/
     private static GridImagesAdapter gridImagesAdapter;
-    /** The message shown if there is a problem downloading the data **/
-    private static final String MESSAGE_ERROR_DOWNLOADING_DATA = "Error updating view";
-    /** The message shown in the progress dialog **/
-    private static final String MESSAGE_INFO_LOADING = "Loading...";
 
     private CommunicatorListener communicatorListener;
 
@@ -70,7 +66,7 @@ public class GridImagesFragment extends Fragment implements AdapterView.OnItemCl
     private void downloadInstagramData(){
         pDialog = new ProgressDialog(getActivity());
         // Showing progress dialog before making http request
-        pDialog.setMessage(MESSAGE_INFO_LOADING);
+        pDialog.setMessage(getString(R.string.loading));
         pDialog.show();
         VolleyUtils.updatePostList(getActivity().getApplicationContext(),
                 new OnDownloadTaskCompleted() {
@@ -86,7 +82,7 @@ public class GridImagesFragment extends Fragment implements AdapterView.OnItemCl
                 } else {
                     hidePDialog();
                     Toast.makeText(getActivity().getApplicationContext(),
-                            MESSAGE_ERROR_DOWNLOADING_DATA,
+                            getString(R.string.error_updating_view),
                             Toast.LENGTH_SHORT).show();
                 }
             }

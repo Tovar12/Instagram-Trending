@@ -29,6 +29,7 @@ public class BigImageFragment extends Fragment {
 
     private ArrayList<InstagramPost> instagramPosts = new ArrayList<>();
     private int id;
+    private String title;
 
     public BigImageFragment(){
 
@@ -52,6 +53,7 @@ public class BigImageFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), DetailedPostActivity.class);
                 intent.putExtra("post_list", new DataWrapper(instagramPosts));
                 intent.putExtra("id", id);
+                intent.putExtra("title", title);
                 startActivity(intent);
             }
         });
@@ -62,7 +64,7 @@ public class BigImageFragment extends Fragment {
         return rootView;
     }
 
-    public void setImage(String imageURL){
+    public void setImageURL(String imageURL){
         this.imageURL = imageURL;
     }
 
@@ -74,5 +76,7 @@ public class BigImageFragment extends Fragment {
         this.id = id;
     }
 
-
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
