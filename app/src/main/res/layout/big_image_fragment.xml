@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<!--
-    <TextView
-        style="?android:textAppearanceMedium"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--
+        <TextView
+            style="?android:textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.2"
+            android:padding="16dp"
+            android:textColor="#000000" />
+
+    <ImageView
+        android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lineSpacingMultiplier="1.2"
-        android:padding="16dp"
-        android:textColor="#000000" />
- -->
-    <ImageView
-        android:id="@+id/imageSlider"
-        android:padding="16dp"
+        android:padding="16dp" />
+     -->
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
 
-</ScrollView>
+</LinearLayout>

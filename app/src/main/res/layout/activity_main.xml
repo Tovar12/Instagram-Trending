@@ -50,7 +50,7 @@
 
                 <fragment
                     android:id="@+id/fragment2"
-                    android:name="com.kogimobile.kogitest.fragments.GridImagesFragment"
+                    android:name="com.ftovaro.instagramtrending.fragments.GridImagesFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:layout="@layout/grid_images_fragment" />

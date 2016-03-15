@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kogimobile.kogitest">
-
+    package="com.ftovaro.instagramtrending">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.DetailedPostActivity"
+            android:label="@string/title_activity_detailed_post"
+            android:theme="@style/MyMaterialTheme"></activity>
     </application>
 
 </manifest>
