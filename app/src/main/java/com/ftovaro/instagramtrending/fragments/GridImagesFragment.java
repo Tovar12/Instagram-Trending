@@ -78,11 +78,9 @@ public class GridImagesFragment extends Fragment implements AdapterView.OnItemCl
                             posts.addAll(instagramPosts);
                             gridImagesAdapter.swapPosts(posts);
                             gridImagesAdapter.updateDataSet();
-                            hidePDialog();
                             communicatorListener.sendInstagramPosts(posts);
                             communicatorListener.refreshCompleted();
                         } else {
-                            hidePDialog();
                             Toast.makeText(getActivity().getApplicationContext(),
                                     getString(R.string.error_updating_view),
                                     Toast.LENGTH_SHORT).show();

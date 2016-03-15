@@ -106,8 +106,9 @@ public class MainActivity extends AppCompatActivity implements CommunicatorListe
 
     @Override
     public void sendInstagramPosts(ArrayList<InstagramPost> instagramPosts) {
-        mPagerAdapter.setInstagramPosts(instagramPosts);
-        mPagerAdapter.notifyDataSetChanged();
+        mPagerAdapter.swapPosts(instagramPosts);
+        mPagerAdapter.updateDataSet();
+        mPager.setCurrentItem(0);
     }
 
     @Override

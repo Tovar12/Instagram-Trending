@@ -41,8 +41,19 @@ public class BigImageAdapter extends FragmentStatePagerAdapter {
         return instagramPosts.size();
     }
 
-    public void setInstagramPosts(ArrayList<InstagramPost> instagramPosts){
-        this.instagramPosts.addAll(instagramPosts);
+    public void swapPosts(ArrayList<InstagramPost> instagramPosts) {
+        this.instagramPosts = instagramPosts;
     }
-    
+
+    public void updateDataSet(){
+        notifyDataSetChanged();
+    }
+
+    /**
+     * Necessary if the ViewPager notifyDataChanged is not working.
+     */
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
 }
