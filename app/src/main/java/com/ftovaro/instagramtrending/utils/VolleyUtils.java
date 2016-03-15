@@ -17,7 +17,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by
@@ -141,7 +146,7 @@ public class VolleyUtils {
         for(int i = 0; i < jsonArrayInstagram.length(); i++){
             try{
                 JSONObject jsonObjectComplete = jsonArrayInstagram.getJSONObject(i);
-                String createdTime = jsonObjectComplete.getString(JSON_TIME_NAME);
+                String createdTime = getDate(jsonObjectComplete.getString(JSON_TIME_NAME));
                 String link = jsonObjectComplete.getString(JSON_LINK_NAME);
                 JSONObject captionObject = jsonObjectComplete.getJSONObject(JSON_CAPTION_NAME);
                 String title = captionObject.getString(JSON_TITLE_NAME);
@@ -169,5 +174,15 @@ public class VolleyUtils {
                 Log.e("error","Error of an object from the service");
             }
         }
+    }
+
+    private static String getDate(String timeStamp) {
+        long time = Long.parseLong(timeStamp);
+        Calendar calendar = Calendar.getInstance();
+        TimeZone tz = TimeZone.getDefault();
+        calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        java.util.Date currentTimeZone = new java.util.Date(time * 1000);
+        return sdf.format(currentTimeZone);
     }
 }
