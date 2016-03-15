@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Instagram Trending</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="lorem_ipsum">Lorem ipsum</string>
+
+    <!-- -->
+    <!-- DetailedPostActivity -->
+    <string name="title_activity_detailed_post">DetailedPostActivity</string>
+    <string name="publish_date">Fecha de publicación:</string>
+    <string name="author">Autor:</string>
+    <string name="tag">Etiquetas:</string>
+
+    <string name="title_activity_web">WebActivity</string>
+
+    <!-- GridImagesFragment -->
+    <string name="loading">Cargando</string>
+    <string name="error_updating_view">Error actualizando la vista</string>
+</resources>
