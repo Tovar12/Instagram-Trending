@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements CommunicatorListe
 
     private static final int START_POSITION_SWIPE = 0;
 
+    private static final int START_POSITION_PAGER = 0;
+
     private static final int END_POSITION_SWIPE = 300;
 
     @Override
@@ -108,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements CommunicatorListe
     public void sendInstagramPosts(ArrayList<InstagramPost> instagramPosts) {
         mPagerAdapter.swapPosts(instagramPosts);
         mPagerAdapter.updateDataSet();
-        mPager.setCurrentItem(0);
+        mPager.setCurrentItem(START_POSITION_PAGER);
     }
 
     @Override

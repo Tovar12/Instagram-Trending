@@ -38,9 +38,12 @@ public class DetailedPostActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setSupportActionBar(toolbar);
 
         ViewPager mPager = (ViewPager) findViewById(R.id.pagerDetailed);
-        DetailedPostAdapter mPagerAdapter = new DetailedPostAdapter(getSupportFragmentManager(), instagramPosts);
+        DetailedPostAdapter mPagerAdapter = new DetailedPostAdapter(getSupportFragmentManager(),
+                instagramPosts);
         mPager.setAdapter(mPagerAdapter);
         mPager.setCurrentItem(id);
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -80,6 +83,16 @@ public class DetailedPostActivity extends AppCompatActivity {
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, linkPost);
         mShareActionProvider.setShareIntent(shareIntent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default: return super.onOptionsItemSelected(item);
+        }
     }
 
 

@@ -28,8 +28,8 @@ public class DetailedPostAdapter extends FragmentStatePagerAdapter {
         InstagramPost post = instagramPosts.get(position);
         InstagramUser user = post.getInstagramUser();
         fragment.setImageURL(post.getImageURL());
-        //TODO Convertir TimeStamp a Date
         fragment.setPublishDate(post.getTimeStamp());
+        fragment.setTag(post.getCompleteTags());
         fragment.setAuthor(user.getUserName());
         fragment.setProfileURL(user.getUrlProfile());
         return fragment;

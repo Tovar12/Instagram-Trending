@@ -19,6 +19,9 @@ public class InstagramPost implements Serializable {
     /** A list of the tags that the user sets on It's pictures **/
     private final List<String> tags;
 
+    /** All the tags in a single line with a number sign **/
+    private final String completeTags;
+
     /** The title of the picture **/
     private final String title;
 
@@ -43,6 +46,7 @@ public class InstagramPost implements Serializable {
         this.thumbnailURL = builder.thumbnailURL;
         this.imageURL = builder.imageURL;
         this.link = builder.link;
+        this.completeTags = builder.completeTags;
     }
 
     public String getTimeStamp() {
@@ -74,6 +78,10 @@ public class InstagramPost implements Serializable {
         return link;
     }
 
+    public String getCompleteTags() {
+        return completeTags;
+    }
+
     /**
      * Builder class of an Instragram post
      */
@@ -86,6 +94,7 @@ public class InstagramPost implements Serializable {
         private String thumbnailURL;
         private String imageURL;
         private String link;
+        private String completeTags;
 
         public InstagramPostBuilder(){
         }
@@ -122,6 +131,11 @@ public class InstagramPost implements Serializable {
 
         public InstagramPostBuilder link(String link){
             this.link = link;
+            return this;
+        }
+
+        public InstagramPostBuilder completeTags(String completeTags){
+            this.completeTags = completeTags;
             return this;
         }
 

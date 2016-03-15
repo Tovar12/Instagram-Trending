@@ -22,7 +22,7 @@ import org.w3c.dom.Text;
  */
 public class DetailedPostFragment extends Fragment {
 
-    private String imageURL, publishDate, author, profileURL;
+    private String imageURL, publishDate, author, profileURL, tag;
 
     public DetailedPostFragment() {
         // Required empty public constructor
@@ -46,6 +46,9 @@ public class DetailedPostFragment extends Fragment {
 
         TextView authorText = (TextView) rootView.findViewById(R.id.author);
         authorText.setText(author);
+
+        TextView tags = (TextView) rootView.findViewById(R.id.tag);
+        tags.setText(tag);
 
         image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,5 +76,9 @@ public class DetailedPostFragment extends Fragment {
 
     public void setProfileURL(String profileURL) {
         this.profileURL = profileURL;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

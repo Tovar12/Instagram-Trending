@@ -83,7 +83,6 @@ public class VolleyUtils {
                                     .getJSONArray(MAIN_JSONARRAY_NAME);
                             extractDataFromJson(jsonArrayInstagram);
                             taskCompleted.onTaskCompleted(posts, false, null);
-                            //Log.d("Response:%n %s", response.toString(4));
                         } catch (JSONException e) {
                             e.printStackTrace();
                             taskCompleted.onTaskCompleted(null, true, e.getMessage());
@@ -118,7 +117,8 @@ public class VolleyUtils {
                                            ArrayList<String> tagsList,
                                            String thumbnailURL,
                                            String standardResolutionURL,
-                                           String link){
+                                           String link,
+                                           String completeTags){
         StringBuilder urlProfile = new StringBuilder()
                 .append(INSTAGRAM_URL)
                 .append(userName);
@@ -137,6 +137,7 @@ public class VolleyUtils {
                 .thumbnailURL(thumbnailURL)
                 .imageURL(standardResolutionURL)
                 .link(link)
+                .completeTags(completeTags)
                 .build();
 
         posts.add(instagramPost);
@@ -155,8 +156,15 @@ public class VolleyUtils {
                 String fullName = fromObject.getString(JSON_FULLNAME_NAME);
                 JSONArray tagsArray = jsonObjectComplete.getJSONArray(JSON_TAGS_NAME);
                 ArrayList<String> tagsList = new ArrayList<>();
+                String completeTags = "";
                 for(int j = 0; j < tagsArray.length(); j++){
                     tagsList.add(tagsArray.get(j).toString());
+                    completeTags += "#" + tagsArray.get(j).toString() + ", ";
+                }
+                if(tagsArray.length() > 0){
+                    completeTags = completeTags.substring(0, completeTags.length() - 2);
+                }else{
+                    completeTags = "No tags used";
                 }
                 JSONObject imagesObject = jsonObjectComplete.getJSONObject(JSON_IMAGES_NAME);
                 JSONObject thumbnailObject = imagesObject.getJSONObject(JSON_THUMBNAIL_NAME);
@@ -166,7 +174,7 @@ public class VolleyUtils {
                 String standardResolutionURL = standardResolutionObject.getString(JSON_IMAGE_URL_NAME);
 
                 createInstagramPost(createdTime, title, userName, fullName, tagsList, thumbnailURL,
-                        standardResolutionURL, link);
+                        standardResolutionURL, link, completeTags);
 
             }catch (JSONException je){
                 //If there is an exception is because some data came wrong from the service so we
