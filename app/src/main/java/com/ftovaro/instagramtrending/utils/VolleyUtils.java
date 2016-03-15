@@ -9,7 +9,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.ftovaro.instagramtrending.R;
 import com.ftovaro.instagramtrending.interfaces.OnDownloadTaskCompleted;
 import com.ftovaro.instagramtrending.model.InstagramPost;
 import com.ftovaro.instagramtrending.model.InstagramUser;
@@ -34,6 +33,8 @@ public class VolleyUtils {
     private static final String MAIN_JSONARRAY_NAME = "data";
     /** The name of the json object with the timestamp **/
     private static final String JSON_TIME_NAME = "created_time";
+    /** The name of the json object with the link of the post **/
+    private static final String JSON_LINK_NAME = "link";
     /** The name of the json object with the caption data **/
     private static final String JSON_CAPTION_NAME = "caption";
     /** The name of the json object with the title **/
@@ -50,8 +51,8 @@ public class VolleyUtils {
     private static final String JSON_IMAGES_NAME = "images";
     /** The name of the json object with the thumbnail url **/
     private static final String JSON_THUMBNAIL_NAME = "thumbnail";
-    /** The name of the json object with the low resolution url **/
-    private static final String JSON_LOW_RESOLUTION_NAME = "low_resolution";
+    /** The name of the json object with the standard resolution url **/
+    private static final String JSON_STANDARD_RESOLUTION_NAME = "standard_resolution";
     /** The name of the json object with the url of an image **/
     private static final String JSON_IMAGE_URL_NAME = "url";
     /** The Instagram prefix url **/
@@ -111,7 +112,8 @@ public class VolleyUtils {
                                            String fullName,
                                            ArrayList<String> tagsList,
                                            String thumbnailURL,
-                                           String lowResolutionURL){
+                                           String standardResolutionURL,
+                                           String link){
         StringBuilder urlProfile = new StringBuilder()
                 .append(INSTAGRAM_URL)
                 .append(userName);
@@ -128,7 +130,8 @@ public class VolleyUtils {
                 .tags(tagsList)
                 .instagramUser(instagramUser)
                 .thumbnailURL(thumbnailURL)
-                .imageURL(lowResolutionURL)
+                .imageURL(standardResolutionURL)
+                .link(link)
                 .build();
 
         posts.add(instagramPost);
@@ -139,6 +142,7 @@ public class VolleyUtils {
             try{
                 JSONObject jsonObjectComplete = jsonArrayInstagram.getJSONObject(i);
                 String createdTime = jsonObjectComplete.getString(JSON_TIME_NAME);
+                String link = jsonObjectComplete.getString(JSON_LINK_NAME);
                 JSONObject captionObject = jsonObjectComplete.getJSONObject(JSON_CAPTION_NAME);
                 String title = captionObject.getString(JSON_TITLE_NAME);
                 JSONObject fromObject = captionObject.getJSONObject(JSON_FROM_NAME);
@@ -152,11 +156,12 @@ public class VolleyUtils {
                 JSONObject imagesObject = jsonObjectComplete.getJSONObject(JSON_IMAGES_NAME);
                 JSONObject thumbnailObject = imagesObject.getJSONObject(JSON_THUMBNAIL_NAME);
                 String thumbnailURL = thumbnailObject.getString(JSON_IMAGE_URL_NAME);
-                JSONObject lowResolutionObject = imagesObject.getJSONObject(JSON_LOW_RESOLUTION_NAME);
-                String lowResolutionURL = lowResolutionObject.getString(JSON_IMAGE_URL_NAME);
+                JSONObject standardResolutionObject = imagesObject
+                        .getJSONObject(JSON_STANDARD_RESOLUTION_NAME);
+                String standardResolutionURL = standardResolutionObject.getString(JSON_IMAGE_URL_NAME);
 
                 createInstagramPost(createdTime, title, userName, fullName, tagsList, thumbnailURL,
-                        lowResolutionURL);
+                        standardResolutionURL, link);
 
             }catch (JSONException je){
                 //If there is an exception is because some data came wrong from the service so we

@@ -33,7 +33,6 @@ public class BigImageAdapter extends FragmentStatePagerAdapter {
         InstagramPost post = instagramPosts.get(position);
         fragment.setImageURL(post.getImageURL());
         fragment.setId(position);
-        fragment.setTitle(post.getTitle());
         return fragment;
     }
 

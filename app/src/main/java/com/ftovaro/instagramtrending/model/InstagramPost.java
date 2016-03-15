@@ -28,6 +28,9 @@ public class InstagramPost implements Serializable {
     /** The url of the image that will be show **/
     private final String imageURL;
 
+    /** The url of the post **/
+    private final String link;
+
     /**
      * Constructor of the class.
      * @param builder   an object to construct the Instagram post.
@@ -39,6 +42,7 @@ public class InstagramPost implements Serializable {
         this.title = builder.title;
         this.thumbnailURL = builder.thumbnailURL;
         this.imageURL = builder.imageURL;
+        this.link = builder.link;
     }
 
     public String getTimeStamp() {
@@ -66,6 +70,10 @@ public class InstagramPost implements Serializable {
         return imageURL;
     }
 
+    public String getLink() {
+        return link;
+    }
+
     /**
      * Builder class of an Instragram post
      */
@@ -77,6 +85,7 @@ public class InstagramPost implements Serializable {
         private String title;
         private String thumbnailURL;
         private String imageURL;
+        private String link;
 
         public InstagramPostBuilder(){
         }
@@ -108,6 +117,11 @@ public class InstagramPost implements Serializable {
 
         public InstagramPostBuilder imageURL(String imageURL){
             this.imageURL = imageURL;
+            return this;
+        }
+
+        public InstagramPostBuilder link(String link){
+            this.link = link;
             return this;
         }
 
