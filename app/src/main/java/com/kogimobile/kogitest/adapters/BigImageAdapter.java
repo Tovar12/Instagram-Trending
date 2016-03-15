@@ -1,9 +1,18 @@
 package com.kogimobile.kogitest.adapters;
 
 
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+
+import com.kogimobile.kogitest.R;
+import com.kogimobile.kogitest.fragments.BigImageFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,26 +24,22 @@ import java.util.List;
  * @date 12/6/15.
  * @about
  */
-public class BigImageAdapter extends FragmentPagerAdapter {
+public class BigImageAdapter extends FragmentStatePagerAdapter {
 
-    List<Fragment> fragmentList;
+    private static final int NUM_PAGES = 5;
 
-    public BigImageAdapter(FragmentManager fragmentManager){
-        super(fragmentManager);
-        fragmentList = new ArrayList<>();
-    }
-
-    public void addFragment(Fragment fragment){
-        fragmentList.add(fragment);
+    public BigImageAdapter(FragmentManager fm){
+        super(fm);
     }
 
     @Override
-    public Fragment getItem(int arg0){
-        return fragmentList.get(arg0);
+    public Fragment getItem(int position) {
+        return new BigImageFragment();
     }
 
     @Override
-    public int getCount(){
-        return fragmentList.size();
+    public int getCount() {
+        return NUM_PAGES;
     }
+    
 }

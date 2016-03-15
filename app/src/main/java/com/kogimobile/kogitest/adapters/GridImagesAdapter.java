@@ -22,11 +22,12 @@ public class GridImagesAdapter extends BaseAdapter{
 
     private Context context;
     private ArrayList<InstagramPost> posts;
-    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+    ImageLoader imageLoader;
 
     public GridImagesAdapter(Context context, ArrayList<InstagramPost> posts){
         this.posts = posts;
         this.context = context;
+        imageLoader = AppController.getInstance().getImageLoader(context);
     }
 
     @Override

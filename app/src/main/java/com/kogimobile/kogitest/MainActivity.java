@@ -1,6 +1,9 @@
 package com.kogimobile.kogitest;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,16 +13,21 @@ import android.view.MenuItem;
 import com.kogimobile.kogitest.adapters.BigImageAdapter;
 import com.kogimobile.kogitest.fragments.BigImageFragment;
 import com.kogimobile.kogitest.utils.OnPostPressListener;
-
+//FragmentActivity
 public class MainActivity extends AppCompatActivity implements OnPostPressListener {
 
-    ViewPager viewPager = null;
-    BigImageAdapter bigImageAdapter;
+    private ViewPager mPager;
+
+    private BigImageAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new BigImageAdapter(getSupportFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -48,17 +56,18 @@ public class MainActivity extends AppCompatActivity implements OnPostPressListen
         return super.onOptionsItemSelected(item);
     }
 
-    public void inicializeBigImageAdapter(String url){
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        BigImageAdapter adapter = new BigImageAdapter(getSupportFragmentManager());
-        adapter.addFragment(BigImageFragment.newInstance(url));
-        viewPager.setAdapter(adapter);
+    @Override
+    public void onPostPressed(String url) {
+
     }
 
     @Override
-    public void onPostPressed(String url) {
-        //BigImageFragment bigImageFragment = new BigImageFragment();
-        //bigImageFragment.setBigImage(url);
-        inicializeBigImageAdapter(url);
+    public void onBackPressed() {
+        if(mPager.getCurrentItem() == 0) {
+            super.onBackPressed();
+        } else {
+            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+        }
     }
+
 }
