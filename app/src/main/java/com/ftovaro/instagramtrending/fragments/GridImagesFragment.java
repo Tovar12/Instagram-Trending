@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.ftovaro.instagramtrending.R;
 import com.ftovaro.instagramtrending.adapters.GridImagesAdapter;
 import com.ftovaro.instagramtrending.interfaces.CommunicatorListener;
 import com.ftovaro.instagramtrending.interfaces.OnImageSliderListener;
+import com.ftovaro.instagramtrending.interfaces.OnRefreshListener;
 import com.ftovaro.instagramtrending.model.InstagramPost;
 import com.ftovaro.instagramtrending.interfaces.OnDownloadTaskCompleted;
 import com.ftovaro.instagramtrending.interfaces.OnPostPressListener;
@@ -26,7 +28,8 @@ import java.util.ArrayList;
 /**
  * Created by FelipeTovarMac on 12/5/15.
  */
-public class GridImagesFragment extends Fragment implements AdapterView.OnItemClickListener{
+public class GridImagesFragment extends Fragment implements AdapterView.OnItemClickListener,
+        OnRefreshListener{
 
     private static ArrayList<InstagramPost> posts = new ArrayList<>();
     /** ProgressDialog that shows a loading text **/
@@ -59,8 +62,33 @@ public class GridImagesFragment extends Fragment implements AdapterView.OnItemCl
         downloadInstagramData();
         gridview.setAdapter(gridImagesAdapter);
         gridview.setOnItemClickListener(this);
-        //communicatorListener.sendInstagramPosts(posts);
+
         return rootView;
+    }
+
+    @Override
+    public void refreshPosts() {
+        posts.clear();
+        VolleyUtils.updatePostList(getActivity().getApplicationContext(),
+                new OnDownloadTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(ArrayList<InstagramPost> instagramPosts,
+                                                boolean error, String message) {
+                        if(!error){
+                            posts.addAll(instagramPosts);
+                            gridImagesAdapter.swapPosts(posts);
+                            gridImagesAdapter.updateDataSet();
+                            hidePDialog();
+                            communicatorListener.sendInstagramPosts(posts);
+                            communicatorListener.refreshCompleted();
+                        } else {
+                            hidePDialog();
+                            Toast.makeText(getActivity().getApplicationContext(),
+                                    getString(R.string.error_updating_view),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void downloadInstagramData(){

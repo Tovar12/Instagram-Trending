@@ -10,4 +10,5 @@ import java.util.ArrayList;
 public interface CommunicatorListener {
     void sendInstagramPosts(ArrayList<InstagramPost> instagramPosts);
     void onPostPressed(int position);
+    void refreshCompleted();
 }
