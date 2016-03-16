@@ -163,8 +163,6 @@ public class VolleyUtils {
                 }
                 if(tagsArray.length() > 0){
                     completeTags = completeTags.substring(0, completeTags.length() - 2);
-                }else{
-                    completeTags = "No tags used";
                 }
                 JSONObject imagesObject = jsonObjectComplete.getJSONObject(JSON_IMAGES_NAME);
                 JSONObject thumbnailObject = imagesObject.getJSONObject(JSON_THUMBNAIL_NAME);

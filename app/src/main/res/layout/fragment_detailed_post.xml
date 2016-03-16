@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:singleLine="true"
+                android:maxLines="2"
                 android:textSize="15sp" />
 
         </LinearLayout>

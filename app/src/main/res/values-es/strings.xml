@@ -3,7 +3,6 @@
     <string name="action_settings">Ajustes</string>
     <string name="lorem_ipsum">Lorem ipsum</string>
 
-    <!-- -->
     <!-- DetailedPostActivity -->
     <string name="title_activity_detailed_post">DetailedPostActivity</string>
     <string name="publish_date">Fecha de publicación:</string>
