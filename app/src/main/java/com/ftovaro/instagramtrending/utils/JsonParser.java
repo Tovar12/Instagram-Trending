@@ -62,7 +62,7 @@ public class JsonParser {
      * @param standardResolutionURL     normal quality of the photo of the post.
      * @param link                      link to original post on Instagram web site.
      * @param completeTags              all tags concatenated in a single String.
-     * @return
+     * @return                          a complete built InstagramPost.
      */
     private static InstagramPost createInstagramPost(String createdTime,
                                            String title,

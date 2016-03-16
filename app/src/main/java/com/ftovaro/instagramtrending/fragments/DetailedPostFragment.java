@@ -1,6 +1,5 @@
 package com.ftovaro.instagramtrending.fragments;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,16 +15,17 @@ import com.ftovaro.instagramtrending.activities.WebActivity;
 import com.ftovaro.instagramtrending.network.AppController;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Represents an element of the view pager that has all the detailed posts.
+ * Created by FelipeTovarMac on 5/12/15.
  */
 public class DetailedPostFragment extends Fragment {
 
+    /** Attributes of an InstagramPost **/
     private String imageURL, publishDate, author, profileURL, tag;
 
     public DetailedPostFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,22 +60,42 @@ public class DetailedPostFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * Set the URL of the post's image.
+     * @param imageURL  URL of the image.
+     */
     public void setImageURL(String imageURL){
         this.imageURL = imageURL;
     }
 
+    /**
+     * Set the publish date of the post.
+     * @param publishDate   date of publish of the post.
+     */
     public void setPublishDate(String publishDate){
         this.publishDate = publishDate;
     }
 
+    /**
+     * Set the author of the post.
+     * @param author    username of the author of the post.
+     */
     public void setAuthor(String author){
         this.author = author;
     }
 
+    /**
+     * Set the URL of the profile of the post.
+     * @param profileURL    URL to the original post.
+     */
     public void setProfileURL(String profileURL) {
         this.profileURL = profileURL;
     }
 
+    /**
+     * Tags used on the post.
+     * @param tag   String with all the tags concatenated.
+     */
     public void setTag(String tag) {
         this.tag = tag;
     }

@@ -1,6 +1,5 @@
 package com.ftovaro.instagramtrending.adapters;
 
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -11,14 +10,12 @@ import com.ftovaro.instagramtrending.model.InstagramPost;
 import java.util.ArrayList;
 
 /**
- * Created by
- *
- * @author Felipe Tovar on
- * @date 12/6/15.
- * @about
+ * Adapter for the fragment that has the big image.
+ * Created by FelipeTovar on 6/12/15.
  */
 public class BigImageAdapter extends FragmentStatePagerAdapter {
 
+    /** list of InstagramPosts **/
     ArrayList<InstagramPost> instagramPosts;
 
     public BigImageAdapter(FragmentManager fm, ArrayList<InstagramPost> instagramPosts){

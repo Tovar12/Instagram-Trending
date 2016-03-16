@@ -19,12 +19,21 @@ import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a more detailed post and shows information about It.
+ * Created by FelipeTovar on 6/12/15.
+ */
 public class DetailedPostActivity extends AppCompatActivity {
 
+    /** List of Instagram posts **/
     private ArrayList<InstagramPost> instagramPosts = new ArrayList<>();
+    /** Toolbar of the activity **/
     private Toolbar toolbar;
+    /** Allows to share with external apps **/
     private ShareActionProvider mShareActionProvider;
+    /** Link of the current post **/
     private String linkPost;
+    /** Creates the circles that shows the length of the total of posts **/
     private CirclePageIndicator circlePageIndicator;
 
     @Override

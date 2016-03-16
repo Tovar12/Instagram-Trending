@@ -18,17 +18,19 @@ import com.ftovaro.instagramtrending.utils.DataWrapper;
 import java.util.ArrayList;
 
 /**
- * Created by FelipeTovarMac on 12/5/15.
+ * Represents an element of the view pager that has all the big image
+ * Created by FelipeTovarMac on 5/12/15.
  */
 public class BigImageFragment extends Fragment {
-
+    /** URL of the image **/
     private String imageURL;
-
+    /** list of posts **/
     private ArrayList<InstagramPost> instagramPosts = new ArrayList<>();
+    /** unique id that represents the position of the post in the list of posts **/
     private int id;
 
     public BigImageFragment(){
-
+        // Required empty public constructor
     }
 
     @Override
@@ -52,20 +54,31 @@ public class BigImageFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
         image.setDefaultImageResId(R.drawable.image_placeholder);
 
         return rootView;
     }
 
+    /**
+     * Set the URL of the post's image.
+     * @param imageURL  URL of the image.
+     */
     public void setImageURL(String imageURL){
         this.imageURL = imageURL;
     }
 
+    /**
+     * Set a list of InstagramPosts.
+     * @param instagramPosts    list of InstagramPosts.
+     */
     public void setInstagramPosts(ArrayList<InstagramPost> instagramPosts){
         this.instagramPosts.addAll(instagramPosts);
     }
 
+    /**
+     * Set the id for the current fragment.
+     * @param id    unique id for the fragment.
+     */
     public void setId(int id){
         this.id = id;
     }

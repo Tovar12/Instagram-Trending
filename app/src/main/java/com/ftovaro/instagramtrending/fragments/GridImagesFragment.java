@@ -22,24 +22,21 @@ import com.ftovaro.instagramtrending.network.VolleyUtils;
 import java.util.ArrayList;
 
 /**
+ * Manage the grid view of the application.
  * Created by FelipeTovarMac on 12/5/15.
  */
 public class GridImagesFragment extends Fragment implements AdapterView.OnItemClickListener,
         OnRefreshListener{
 
+    /** List of InstagramPosts **/
     private static ArrayList<InstagramPost> posts = new ArrayList<>();
     /** ProgressDialog that shows a loading text **/
     private static ProgressDialog pDialog;
     /** An adapter that has the settings of the list **/
     private static GridImagesAdapter gridImagesAdapter;
-
+    /** Listener with parent Activity **/
     private CommunicatorListener communicatorListener;
 
-    //private OnImageSliderListener sendInstrgramPosts;
-
-    GridView gridview;
-
-    //OnPostPressListener postPressListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,7 +49,7 @@ public class GridImagesFragment extends Fragment implements AdapterView.OnItemCl
         // Inflate the layout for this fragment
         View  rootView =  inflater.inflate(R.layout.grid_images_fragment, container, false);
 
-        gridview = (GridView) rootView.findViewById(R.id.grid);
+        GridView gridview = (GridView) rootView.findViewById(R.id.grid);
         gridImagesAdapter = new GridImagesAdapter(this.getActivity().getApplicationContext(),
                 posts);
         downloadInstagramData();
@@ -85,6 +82,9 @@ public class GridImagesFragment extends Fragment implements AdapterView.OnItemCl
                 });
     }
 
+    /**
+     * Send the request to download data from the service and update the view with the response.
+     */
     private void downloadInstagramData(){
         pDialog = new ProgressDialog(getActivity());
         // Showing progress dialog before making http request
@@ -111,18 +111,6 @@ public class GridImagesFragment extends Fragment implements AdapterView.OnItemCl
         });
     }
 
-    public static void setPosts(ArrayList<InstagramPost> instagramPosts){
-        //posts.addAll(instagramPosts);
-        //gridImagesAdapter.swapPosts(instagramPosts);
-        /*
-        if(isSwipeRefreshActive){
-            isSwipeRefreshActive = false;
-            swipeRefreshLayout.setRefreshing(false);
-        }
-        */
-        hidePDialog();
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -139,36 +127,15 @@ public class GridImagesFragment extends Fragment implements AdapterView.OnItemCl
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-        // retrieve the GridView item
-        //GridViewItem item = mItems.get(position);
-
-        // do something
-        //Toast.makeText(getActivity(), posts.get(position).getTitle(), Toast.LENGTH_SHORT).show();
         communicatorListener.onPostPressed(position);
 
     }
-
-    /*
-    @Override
-    public void onResume() {
-        /*
-        pDialog = new ProgressDialog(getActivity());
-        // Showing progress dialog before making http request
-        pDialog.setMessage("Loading...");
-        pDialog.show();
-        /** Starts the thread to update the list of posts **
-        new UpdatePostsTask().execute();
-        //hidePDialog();
-        super.onResume();
-    }
-    */
 
     @Override
     public void onAttach(Activity context) {
         super.onAttach(context);
         // Verify that the host activity implements the callback interface
         try {
-
             communicatorListener = (CommunicatorListener) context;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception

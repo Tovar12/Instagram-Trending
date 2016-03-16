@@ -16,12 +16,16 @@ import com.ftovaro.instagramtrending.network.AppController;
 import java.util.ArrayList;
 
 /**
- * Created by FelipeTovarMac on 12/5/15.
+ * Adapter for the fragment that has the grid of images.
+ * Created by FelipeTovarMac on 5/12/15.
  */
 public class GridImagesAdapter extends BaseAdapter{
 
+    /** Context of the current activity **/
     private Context context;
+    /** list of InstagramPosts **/
     private ArrayList<InstagramPost> posts;
+    /** loader that user LRU caché for images **/
     ImageLoader imageLoader;
 
     public GridImagesAdapter(Context context, ArrayList<InstagramPost> posts){
@@ -61,7 +65,6 @@ public class GridImagesAdapter extends BaseAdapter{
         viewHolder.title.setText(posts.get(position).getTitle());
         viewHolder.thumbnail.setImageUrl(posts.get(position).getThumbnailURL(), imageLoader);
 
-
         return convertView;
 
     }
@@ -74,10 +77,16 @@ public class GridImagesAdapter extends BaseAdapter{
         this.posts = postsLists;
     }
 
+    /**
+     * Update the data in the adapter.
+     */
     public void updateDataSet(){
         notifyDataSetChanged();
     }
 
+    /**
+     * Class that represents the GUI of each element of the grid.
+     */
     private static class ViewHolder {
         NetworkImageView thumbnail;
         TextView title;

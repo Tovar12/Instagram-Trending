@@ -11,10 +11,12 @@ import com.ftovaro.instagramtrending.model.InstagramUser;
 import java.util.ArrayList;
 
 /**
+ * Adapter for the fragment of detailed post.
  * Created by FelipeTovar on 14-Mar-16.
  */
 public class DetailedPostAdapter extends FragmentStatePagerAdapter {
 
+    /** list of InstagramPosts **/
     ArrayList<InstagramPost> instagramPosts;
 
     public DetailedPostAdapter(FragmentManager fm, ArrayList<InstagramPost> instagramPosts){
@@ -38,9 +40,5 @@ public class DetailedPostAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getCount() {
         return instagramPosts.size();
-    }
-
-    public void setInstagramPosts(ArrayList<InstagramPost> instagramPosts){
-        this.instagramPosts.addAll(instagramPosts);
     }
 }

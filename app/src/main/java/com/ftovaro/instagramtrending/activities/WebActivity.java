@@ -17,6 +17,10 @@ import android.widget.TextView;
 
 import com.ftovaro.instagramtrending.R;
 
+/**
+ * Manage the navigation through Internet.
+ * Created by FelipeTovar on 6/12/15.
+ */
 public class WebActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;

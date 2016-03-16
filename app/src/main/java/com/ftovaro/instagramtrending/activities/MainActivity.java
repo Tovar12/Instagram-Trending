@@ -6,41 +6,41 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import com.ftovaro.instagramtrending.R;
 import com.ftovaro.instagramtrending.adapters.BigImageAdapter;
 import com.ftovaro.instagramtrending.fragments.GridImagesFragment;
 import com.ftovaro.instagramtrending.interfaces.CommunicatorListener;
-import com.ftovaro.instagramtrending.interfaces.OnImageSliderListener;
-import com.ftovaro.instagramtrending.interfaces.OnPostPressListener;
 import com.ftovaro.instagramtrending.interfaces.OnRefreshListener;
 import com.ftovaro.instagramtrending.model.InstagramPost;
 import com.ftovaro.instagramtrending.utils.ScrollableSwipeRefreshLayout;
 
 import java.util.ArrayList;
 
+/**
+ * Main activity of the app. Has two fragments, BigImage and GridImages.
+ * Created by FelipeTovar on 6/12/15.
+ */
 public class MainActivity extends AppCompatActivity implements CommunicatorListener,
         SwipeRefreshLayout.OnRefreshListener  {
 
+    /** Big image slider **/
     private ViewPager mPager;
-
+    /** Adapter of the view pager **/
     private BigImageAdapter mPagerAdapter;
-
+    /** Interface to control the swipe to refresh events **/
     private OnRefreshListener refreshListener;
-
+    /** Custom Swipe Refresh to manage correctly the scroll **/
     private ScrollableSwipeRefreshLayout swipeRefreshLayout;
-
+    /** List of Instagram posts **/
     private ArrayList<InstagramPost> instagramPosts = new ArrayList<>();
-
+    /** Start position of the swipe **/
     private static final int START_POSITION_SWIPE = 0;
-
-    private static final int START_POSITION_PAGER = 0;
-
+    /** Represents how long the swipe should go **/
     private static final int END_POSITION_SWIPE = 300;
+    /** Start position of the view pager **/
+    private static final int START_POSITION_PAGER = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
