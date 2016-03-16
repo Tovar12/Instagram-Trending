@@ -11,7 +11,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ftovaro.instagramtrending.R;
 import com.ftovaro.instagramtrending.model.InstagramPost;
-import com.ftovaro.instagramtrending.utils.AppController;
+import com.ftovaro.instagramtrending.network.AppController;
 
 import java.util.ArrayList;
 

@@ -3,9 +3,7 @@ package com.ftovaro.instagramtrending.fragments;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +14,10 @@ import android.widget.Toast;
 import com.ftovaro.instagramtrending.R;
 import com.ftovaro.instagramtrending.adapters.GridImagesAdapter;
 import com.ftovaro.instagramtrending.interfaces.CommunicatorListener;
-import com.ftovaro.instagramtrending.interfaces.OnImageSliderListener;
 import com.ftovaro.instagramtrending.interfaces.OnRefreshListener;
 import com.ftovaro.instagramtrending.model.InstagramPost;
 import com.ftovaro.instagramtrending.interfaces.OnDownloadTaskCompleted;
-import com.ftovaro.instagramtrending.interfaces.OnPostPressListener;
-import com.ftovaro.instagramtrending.utils.VolleyUtils;
+import com.ftovaro.instagramtrending.network.VolleyUtils;
 
 import java.util.ArrayList;
 

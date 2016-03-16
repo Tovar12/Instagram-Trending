@@ -1,4 +1,4 @@
-package com.ftovaro.instagramtrending.utils;
+package com.ftovaro.instagramtrending.network;
 
 /**
  * Created by

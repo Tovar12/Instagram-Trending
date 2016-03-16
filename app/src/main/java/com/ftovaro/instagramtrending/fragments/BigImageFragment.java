@@ -1,23 +1,20 @@
 package com.ftovaro.instagramtrending.fragments;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ftovaro.instagramtrending.R;
 import com.ftovaro.instagramtrending.activities.DetailedPostActivity;
 import com.ftovaro.instagramtrending.model.InstagramPost;
-import com.ftovaro.instagramtrending.utils.AppController;
+import com.ftovaro.instagramtrending.network.AppController;
 import com.ftovaro.instagramtrending.utils.DataWrapper;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**

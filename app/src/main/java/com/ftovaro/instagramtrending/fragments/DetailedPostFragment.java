@@ -13,9 +13,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ftovaro.instagramtrending.R;
 import com.ftovaro.instagramtrending.activities.WebActivity;
-import com.ftovaro.instagramtrending.utils.AppController;
-
-import org.w3c.dom.Text;
+import com.ftovaro.instagramtrending.network.AppController;
 
 /**
  * A simple {@link Fragment} subclass.
