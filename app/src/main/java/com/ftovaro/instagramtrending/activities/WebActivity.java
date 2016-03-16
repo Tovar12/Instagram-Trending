@@ -3,6 +3,7 @@ package com.ftovaro.instagramtrending.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -20,7 +21,10 @@ public class WebActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setSupportActionBar(toolbar);
 
         WebView webView = (WebView) findViewById(R.id.web_view);
@@ -39,6 +43,16 @@ public class WebActivity extends AppCompatActivity {
 
         webView.loadUrl(profileURL);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default: return super.onOptionsItemSelected(item);
+        }
     }
 
     public class CustomWebViewClient extends WebViewClient {

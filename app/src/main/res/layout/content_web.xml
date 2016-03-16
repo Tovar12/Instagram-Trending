@@ -8,18 +8,26 @@
     tools:context="com.ftovaro.instagramtrending.activities.WebActivity"
     tools:showIn="@layout/activity_web">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <WebView
+            android:id="@+id/web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_alignParentTop="true"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"/>
-
-    <WebView
-        android:id="@+id/web_view"
-        android:layout_below="@id/progressBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-6dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorPrimaryDark"
+        android:indeterminateTintMode="src_atop" />
 
 </RelativeLayout>
