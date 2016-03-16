@@ -2,6 +2,7 @@ package com.ftovaro.instagramtrending.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.ftovaro.instagramtrending.R;
 import com.ftovaro.instagramtrending.adapters.DetailedPostAdapter;
 import com.ftovaro.instagramtrending.model.InstagramPost;
 import com.ftovaro.instagramtrending.utils.DataWrapper;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class DetailedPostActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ShareActionProvider mShareActionProvider;
     private String linkPost;
+    private CirclePageIndicator circlePageIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,11 @@ public class DetailedPostActivity extends AppCompatActivity {
                 instagramPosts);
         mPager.setAdapter(mPagerAdapter);
         mPager.setCurrentItem(id);
+        circlePageIndicator = (CirclePageIndicator) findViewById(R.id.circlesIndicator);
+        circlePageIndicator.setViewPager(mPager);
+        circlePageIndicator.setCurrentItem(id);
+        circlePageIndicator.setFillColor(ContextCompat.getColor(this, R.color.colorPrimary));
+
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -57,6 +65,7 @@ public class DetailedPostActivity extends AppCompatActivity {
                 toolbar.setTitle(title);
                 setSupportActionBar(toolbar);
                 linkPost = instagramPosts.get(position).getLink();
+                circlePageIndicator.setCurrentItem(position);
             }
 
             @Override

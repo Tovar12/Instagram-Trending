@@ -74,37 +74,9 @@ public class MainActivity extends AppCompatActivity implements CommunicatorListe
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onPostPressed(int position) {
         mPager.setCurrentItem(position);
     }
-
-
-    /*
-    TODO Validar si debería ir
-    @Override
-    public void onBackPressed() {
-        if(mPager.getCurrentItem() == 0) {
-            super.onBackPressed();
-        } else {
-            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-        }
-    }
-    */
 
     @Override
     public void sendInstagramPosts(ArrayList<InstagramPost> instagramPosts) {

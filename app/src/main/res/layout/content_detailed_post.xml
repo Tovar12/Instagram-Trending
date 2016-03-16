@@ -18,8 +18,13 @@
             android:id="@+id/pagerDetailed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="?actionBarSize" />
+            android:layout_weight="1" />
+
+        <com.viewpagerindicator.CirclePageIndicator
+            android:id="@+id/circlesIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="8" />
 
     </LinearLayout>
-
 </android.support.design.widget.CoordinatorLayout>
