@@ -21,8 +21,12 @@ To know more about the author of the picture click on the image and you'll be re
 <img src="screenshots/screenshot_3.png" width="400">
 
 
-### Special feature
+### Special features
 
 The app has pull to refresh so you can update the pictures on a cooler way!
 
 <img src="screenshots/screenshot_5.png" width="400">
+
+Instagram Trending also supports two different languages, English and Spanish, awesome!.
+
+<img src="screenshots/screenshot_6.png" width="400">
