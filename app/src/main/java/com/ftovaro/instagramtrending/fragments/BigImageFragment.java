@@ -56,8 +56,7 @@ public class BigImageFragment extends Fragment {
             }
         });
 
-        //TODO Add image placeholder
-        //image.setDefaultImageResId(R.drawable.image_placeholder);
+        image.setDefaultImageResId(R.drawable.image_placeholder);
 
         return rootView;
     }
