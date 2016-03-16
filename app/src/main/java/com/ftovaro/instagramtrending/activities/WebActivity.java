@@ -1,8 +1,12 @@
 package com.ftovaro.instagramtrending.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -15,7 +19,9 @@ import com.ftovaro.instagramtrending.R;
 
 public class WebActivity extends AppCompatActivity {
 
-    ProgressBar progressBar;
+    private ProgressBar progressBar;
+    private String profileURL;
+    private ShareActionProvider mShareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +43,10 @@ public class WebActivity extends AppCompatActivity {
         webView.getSettings().setAllowFileAccess(true);
         webView.getSettings().setDomStorageEnabled(true);
 
-        String profileURL = getIntent().getStringExtra("profileURL");
+        profileURL = getIntent().getStringExtra("profileURL");
+
+        toolbar.setTitle(profileURL);
+        setSupportActionBar(toolbar);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -54,6 +63,26 @@ public class WebActivity extends AppCompatActivity {
             default: return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_web, menu);
+        // Get the menu item.
+        MenuItem menuItem = menu.findItem(R.id.action_share);
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+        setShareIntent();
+
+        return true;
+    }
+
+    private void setShareIntent() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, profileURL);
+        mShareActionProvider.setShareIntent(shareIntent);
+    }
+
 
     public class CustomWebViewClient extends WebViewClient {
         @Override
