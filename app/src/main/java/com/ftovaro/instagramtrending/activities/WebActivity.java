@@ -1,19 +1,20 @@
 package com.ftovaro.instagramtrending.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.ftovaro.instagramtrending.R;
 
 public class WebActivity extends AppCompatActivity {
 
-    private WebView webView;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +23,9 @@ public class WebActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        webView = (WebView) findViewById(R.id.web_view);
+        WebView webView = (WebView) findViewById(R.id.web_view);
         webView.setWebViewClient(new CustomWebViewClient());
+        webView.setWebChromeClient(new CustomWebChromeViewClient());
         webView.getSettings().setBuiltInZoomControls(false);
         webView.getSettings().setSupportZoom(false);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
@@ -32,6 +34,8 @@ public class WebActivity extends AppCompatActivity {
         webView.getSettings().setDomStorageEnabled(true);
 
         String profileURL = getIntent().getStringExtra("profileURL");
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         webView.loadUrl(profileURL);
 
@@ -44,4 +48,18 @@ public class WebActivity extends AppCompatActivity {
         }
     }
 
+    public class CustomWebChromeViewClient extends WebChromeClient {
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            {
+                if (newProgress < 100 && progressBar.getVisibility() == ProgressBar.GONE) {
+                    progressBar.setVisibility(ProgressBar.VISIBLE);
+                }
+                progressBar.setProgress(newProgress);
+                if (newProgress == 100) {
+                    progressBar.setVisibility(ProgressBar.GONE);
+                }
+            }
+        }
+    }
 }

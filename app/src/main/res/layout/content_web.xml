@@ -8,9 +8,18 @@
     tools:context="com.ftovaro.instagramtrending.activities.WebActivity"
     tools:showIn="@layout/activity_web">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_alignParentTop="true"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"/>
+
     <WebView
         android:id="@+id/web_view"
+        android:layout_below="@id/progressBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </RelativeLayout>
